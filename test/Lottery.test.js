@@ -70,4 +70,16 @@ describe('Lottery Contract', () => {
       assert(err);
     }
   });
+
+  // This Test is for Function Modifiers (but written as test pickWinner Fnc because it uses restricted Function Modifiers)
+  it('only Manager can call pickWinner', async () => {
+    try {
+      await lottery.methods.pickWinner().send({
+        from: accounts[1] // Not a Manager Account
+      });
+      assert(false);
+    } catch (err) {
+      assert(err);
+    }
+  });
 });
